@@ -1,0 +1,19 @@
+<% include header %>
+<div class="container-fluid">
+	<form method="POST" action="/article/action/add">
+		<fieldset>
+			<div class="container-fluid">
+				<div class="input-group col-sm-5 col-sm-3-offset ">
+					<div class="row"><label>Title: <input type="text" name="title"></label></div>
+					<div class="row"><label>Url: <input type="text" name="url"></label></div>
+					<div class="row"><label>Text: <textarea name="text"></textarea></label></div>
+				</div>
+				<div class="input-group col-sm-3-offset">
+					<button type="submit" class="btn btn-success">Submit</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+<% include footer %>

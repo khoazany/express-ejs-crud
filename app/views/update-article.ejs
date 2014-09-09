@@ -1,0 +1,40 @@
+<% include header %>
+
+<div class="container-fluid">
+	<form method="POST" action="/article/action/update/<%- article.id %>">
+		<input type="hidden" name="_method" value="put" />
+		<fieldset>
+			<div class="input-group col-sm-5 col-sm-3-offset container-fluid">
+				<div class="row"><label>Title: <input type="text" name="title" value="<%- article.title %>"></label></div>
+				<div class="row"><label>Url: <input type="text" name="url" value="<%- article.url %>"></label></div>
+				<div class="row"><label>Text: <textarea name="text"><%- article.text %></textarea></label></div>
+			</div>
+			<div class="input-group col-sm-3-offset">
+				<button type="submit" class="btn btn-success">Submit</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+<% include footer %>
+
+<script>
+	$('form').submit(function(e){
+		e.preventDefault();
+		var form = $(this);
+		$.ajax({
+			url: form.attr('action'),
+			type: 'PUT',
+			data: form.serialize(),
+		})
+		.done(function() {
+			window.location.href = '/';
+		})
+		.fail(function() {
+			alert('Update error');
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	});
+</script>

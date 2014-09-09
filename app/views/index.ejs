@@ -1,0 +1,51 @@
+<% include header %>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="title container-fluid">
+			<h1><%-title %></h1>
+			<p>Welcome to <%-title %></p>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<% for(var i=0; i < articles.length; i++) { %>
+			<div class="container-fluid">
+				<a class="row" href='<%= articles[i].url %>'>
+					<h1><%= articles[i].title %> (by <%= articles[i].author %>)</h1>
+				</a>
+				<div class="row"><%= articles[i].text %></div>
+				<div class="row"><%= articles[i].date %></div>
+				<div class="row">
+					<div class="input-group">
+						<button type="button" class="btn btn-info" onClick="window.location.href='article/update/<%- articles[i].id %>'">Edit</button>
+						<button type="button" class="btn btn-danger article-delete" data-id="<%- articles[i].id %>">Delete</button>
+					</div>
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+
+<% include footer %>
+
+<script>
+	$('.article-delete').click(function(e){
+		var self = $(this);
+		$.ajax({
+			url: 'article/delete/' + self.data('id'),
+			type: 'DELETE',
+		})
+		.done(function() {
+			window.location.href = '/';
+		})
+		.fail(function() {
+			alert('Delete error');
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	});
+</script>
